@@ -50,6 +50,11 @@ custom:
   # Cloudformation
   apiCertArn: ${ssm:/${self:service.name}/${self:provider.stage}/api/cert/arn}
   apiDomainName: ${ssm:/${self:service.name}/${self:provider.stage}/api/domain_name}
+
+  # layer versions
+  awsLambdaPowertoolsVersion: ${file(layers.json):aws-lambda-powertools.${self:provider.stage}}
+  requestsVersion: ${file(layers.json):requests.${self:provider.stage}}
+  slackClientVersion: ${file(layers.json):slackclient.${self:provider.stage}}
   
   
 functions:

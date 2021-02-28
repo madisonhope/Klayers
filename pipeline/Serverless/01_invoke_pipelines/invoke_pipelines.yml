@@ -22,7 +22,7 @@ invoke_pipeline:
       Action: s3:GetObject
       Resource: ${self:custom.s3LayersArn}/*
   layers:
-    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:48
+    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:${self:custom.awsLambdaPowertoolsVersion}
 
 download_config:
   handler: 01_invoke_pipelines/download_config.download_config_from_github
@@ -42,8 +42,8 @@ download_config:
         - ${self:custom.s3LayersArn}/config/*
   layers:
     - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-lambda-cache:1
-    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-requests:9
-    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:48
+    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-requests:${self:custom.requestsVersion}
+    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:${self:custom.awsLambdaPowertoolsVersion}
 
 invalidate_cache:
   handler: 01_invoke_pipelines/invalidate_cf_cache.main
@@ -78,4 +78,4 @@ invalidate_cache:
           - distribution/${ssm:/${self:service.name}/${self:provider.stage}/api/cfDistribution/id}
   layers:
     - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-lambda-cache:1
-    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:48
+    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:${self:custom.awsLambdaPowertoolsVersion}

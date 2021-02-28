@@ -17,7 +17,7 @@ class DecimalEncoder(json.JSONEncoder):
 def map_keys(items):
     """
     Args:
-        itams: List of dict items to be mapped
+        items: List of dict items to be mapped
     return:
         items: List of dict items whose keys have been renamed according to map_table below
     """

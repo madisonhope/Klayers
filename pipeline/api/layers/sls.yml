@@ -13,7 +13,7 @@ arn_by_regions:
     - dynamodb:Query
     Resource: ${self:custom.dbArn}/index/deployed_in_region
   layers:
-    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:32
+    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:${self:custom.awsLambdaPowertoolsVersion}
   events:
     - httpApi: 'GET /api/v1/layers/latest/{region}'
 
@@ -32,7 +32,7 @@ arn_by_package_region:
     - dynamodb:GetItem
     Resource: ${self:custom.dbArn}
   layers:
-    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:32
+    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:${self:custom.awsLambdaPowertoolsVersion}
   events:
     - httpApi: 'GET /api/v1/layers/latest/{region}/{package}'
 
@@ -51,6 +51,25 @@ list_layers:
     - dynamodb:Query
     Resource: ${self:custom.dbArn}
   layers:
-    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:32
+    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:${self:custom.awsLambdaPowertoolsVersion}
   events:
     - httpApi: 'GET /api/v1/layers/{region}/{package}'
+
+new_released_packages_per_region:
+  handler: layers/new_released_packages_per_region.main
+  description: Get only newly released packages
+  runtime: python3.8
+  timeout: 10
+  memorySize: 256
+  environment:
+    POWERTOOLS_SERVICE_NAME: Klayers.api
+  iamRoleStatementsName: ${self:provider.stage}-api-new-pckg-rgn
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+    - dynamodb:Query
+    Resource: ${self:custom.dbArn}/index/deployed_in_region
+  layers:
+    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:${self:custom.awsLambdaPowertoolsVersion}
+  events:
+    - httpApi: 'GET /api/v1/layers/new/{region}'

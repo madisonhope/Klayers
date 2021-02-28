@@ -67,15 +67,17 @@ def put_requirements_hash(package, version, requirements_txt, requirements_hash)
                         "UpdateExpression": "set "
                         "rqrmntsTxt = :rqrmntsTxt, "
                         "pckgVrsn = :pckgVrsn, "
-                        "rqrmntsHsh = :rqrmntsHsh,"
-                        "bltVrsn = :bltVrsn,"
-                        "crtdDt = :crtdDt",
+                        "rqrmntsHsh = :rqrmntsHsh, "
+                        "bltVrsn = :bltVrsn, "
+                        "crtdDt = :crtdDt, "
+                        "pckg = :pckg",
                         "ExpressionAttributeValues": {
                             ":rqrmntsTxt": {"S": requirements_txt},
                             ":pckgVrsn": {"S": str(version)},
                             ":rqrmntsHsh": {"S": requirements_hash},
                             ":bltVrsn": {"S": new_version},
                             ":crtdDt": {"S": created_date},
+                            ":pckg": {"S": package},
                         },
                         "ConditionExpression": "bltVrsn <> :bltVrsn",
                     }

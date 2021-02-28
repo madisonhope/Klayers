@@ -16,7 +16,7 @@ publish_arns:
         - dynamodb:Query
         Resource: ${self:custom.dbArn}/index/deployed_in_region
     layers:
-      - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:48
+      - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:${self:custom.awsLambdaPowertoolsVersion}
 
 
 publish_reqs:
@@ -37,7 +37,7 @@ publish_reqs:
       - dynamodb:Query
       Resource: ${self:custom.dbArn}
   layers:
-    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:48
+    - arn:aws:lambda:${self:provider.region}:770693421928:layer:Klayers-python38-aws-lambda-powertools:${self:custom.awsLambdaPowertoolsVersion}
 
 publish_github:
   handler: 03_publish/publish_to_github.handler
