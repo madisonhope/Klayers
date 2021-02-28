@@ -1,0 +1,17 @@
+{
+    "requests": {
+        "Klayers-defaultp38": "15",
+        "Klayers-devp38": "15",
+        "Klayers-prodp38": "15"
+    },
+    "aws-lambda-powertools": {
+        "Klayers-defaultp38": "63",
+        "Klayers-devp38": "63",
+        "Klayers-prodp38": "63"
+    },
+    "slackclient": {
+        "Klayers-defaultp38": "26",
+        "Klayers-devp38": "26",
+        "Klayers-prodp38": "26"
+    }
+}
